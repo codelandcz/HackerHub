@@ -10,6 +10,7 @@ public class Main
     ProblemReader reader = new ProblemReader();
     Problem problem = reader.loadProblem();
     ClientFactory factory = new GitHubFactory();
+    //TODO Mask password
     Client client = factory.createClient(ClientType.GITHUB).setCredentials();
 
     System.out.println("Reading repositories...");
@@ -23,5 +24,13 @@ public class Main
     //TODO Check index
     Repository repository = repositories.get(index);
     System.out.println(repository);
+
+    System.out.println("Creating issue...");
+    IssueManager manager = new GitHubIssueManager();
+    Issue createdIssue = manager.createIssue(client, repository, problem);
+    System.out.println("Issue created:");
+    System.out.printf(" Title: %s", createdIssue.getTitle());
+    System.out.println();
+    System.out.printf(" Url: %s", createdIssue.getHtmlUrl());
   }
 }
