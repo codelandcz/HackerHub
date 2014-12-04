@@ -3,12 +3,12 @@ package cz.codeland.hackerhub;
 public class GitHubRepository implements Repository
 {
   private final String name;
-  private final String homepage;
+  private final String htmlUrl;
 
-  public GitHubRepository(String name, String homepage)
+  public GitHubRepository(String name, String htmlUrl)
   {
     this.name = name;
-    this.homepage = homepage;
+    this.htmlUrl = htmlUrl;
   }
 
   @Override
@@ -18,8 +18,14 @@ public class GitHubRepository implements Repository
   }
 
   @Override
-  public String getHomepage()
+  public String getHtmlUrl()
   {
-    return homepage;
+    return htmlUrl;
+  }
+
+  @Override
+  public String toString()
+  {
+    return "{" + this.getName() + ", " + this.getHtmlUrl() + "}";
   }
 }

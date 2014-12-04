@@ -2,6 +2,7 @@ package cz.codeland.hackerhub;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Helper
@@ -23,5 +24,21 @@ public class Helper
     URL url = new URL(link);
     String[] crumbs = link.split("/");
     return crumbs[crumbs.length - 1];
+  }
+
+  public static int readInteger(String question)
+  {
+    System.out.println(question);
+    int input;
+    do {
+      try {
+        input = scanner.nextInt();
+        break;
+      } catch (InputMismatchException e) {
+        System.out.println(e.getMessage());
+      }
+    } while (true);
+
+    return input;
   }
 }

@@ -4,5 +4,5 @@ public interface Repository
 {
   String getName();
 
-  String getHomepage();
+  String getHtmlUrl();
 }

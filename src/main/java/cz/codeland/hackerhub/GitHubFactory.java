@@ -3,13 +3,11 @@ package cz.codeland.hackerhub;
 public class GitHubFactory implements ClientFactory
 {
   @Override
-  public Client createClient(ClientType clientType) throws ClientTypeException
+  public Client createClient(ClientType clientType)
   {
-    Client client;
+    Client client = null;
     if (clientType.equals(ClientType.GITHUB)) {
       client = new GitHubClient();
-    } else {
-      throw new ClientTypeException("Unknown ClientType!");
     }
 
     return client;

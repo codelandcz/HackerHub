@@ -1,53 +1,30 @@
 package cz.codeland.hackerhub;
 
-import org.eclipse.egit.github.core.service.RepositoryService;
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.io.IOException;
-
 public class GitHubClient implements Client
 {
-
   String username = null;
+
+  public String getUsername()
+  {
+    return username;
+  }
+
+  public String getPassword()
+  {
+    return password;
+  }
+
   String password = null;
 
   @Override
-  public Client setCredentials() throws GitHubClientCredentialsException
+  public Client setCredentials()
   {
-    try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
-      username = reader.readLine();
-      password = reader.readLine();
-    } catch (IOException e) {
-      //TODO Add msg
-      throw new GitHubClientCredentialsException();
-    }
+    username = Helper.readString("Insert your username.");
+    password = Helper.readString("Insert your password.");
+
+    org.eclipse.egit.github.core.client.GitHubClient client = new org.eclipse.egit.github.core.client.GitHubClient();
+    client.setCredentials(username, password);
+
     return this;
   }
-
-  @Override
-  public List<Repository> getRepositories()
-  {
-    ArrayList<Repository> repositories = new ArrayList<>();
-    if (username == null) {
-      try {
-        setCredentials();
-      } catch (GitHubClientCredentialsException e) {
-        System.out.println(e.getMessage());
-      }
-    }
-
-    RepositoryService service = new RepositoryService();
-    try {
-      for (org.eclipse.egit.github.core.Repository repo : service.getRepositories("defunkt"))
-        repositories.add(new GitHubRepository(repo.getName(), repo.getHomepage()));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    return repositories;
-  }
-
 }
