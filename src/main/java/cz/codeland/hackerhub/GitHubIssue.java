@@ -57,6 +57,12 @@ public class GitHubIssue implements Issue
     return htmlUrl;
   }
 
+  @Override
+  public int getNumber()
+  {
+    return this.getIssue().getNumber();
+  }
+
   public org.eclipse.egit.github.core.Issue getIssue()
   {
     return issue;

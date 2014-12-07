@@ -15,7 +15,7 @@ public class GitHubRepositoryChooser implements RepositoryChooser
     RepositoryService service = new RepositoryService();
     //TODO Auth
     for (org.eclipse.egit.github.core.Repository repository : service.getRepositories(client.getUsername())) {
-      repositories.add(new GitHubRepository(repository.getName(), repository.getUrl()));
+      repositories.add(new GitHubRepository(repository));
     }
 
     return repositories;
