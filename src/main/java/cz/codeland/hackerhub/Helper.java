@@ -1,7 +1,11 @@
 package cz.codeland.hackerhub;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -40,5 +44,11 @@ public class Helper
     } while (true);
 
     return input;
+  }
+
+  static String readFile(String path, Charset encoding) throws IOException
+  {
+    byte[] encoded = Files.readAllBytes(Paths.get(path));
+    return new String(encoded, encoding);
   }
 }

@@ -11,4 +11,6 @@ public interface Issue
   String getBody();
 
   String getHtmlUrl();
+
+  int getNumber();
 }
