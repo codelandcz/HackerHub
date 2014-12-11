@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GitHubRepositoryChooser implements RepositoryChooser
+public class GitHubRepositoryPicker implements RepositoryPicker
 {
   @Override
   public List<Repository> getRepositories(Client client) throws IOException
@@ -26,8 +26,7 @@ public class GitHubRepositoryChooser implements RepositoryChooser
   {
     for (int i = 0; i < repositories.size(); i++) {
       Repository repository = repositories.get(i);
-      System.out.printf("%3d) %s [%s]", i, repository.getName(), repository.getHtmlUrl());
-      System.out.println();
+      System.out.printf("%3d) %s [%s]%n", i, repository.getName(), repository.getHtmlUrl());
     }
   }
 }

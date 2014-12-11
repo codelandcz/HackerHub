@@ -9,7 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <mainClass>cz.codeland.hackerhub.Main</mainClass>
+        <mainClass>cz.codeland.hackerhub.HackerHub</mainClass>
         <jar.final.name>HackerHub</jar.final.name>
         <compiler.source.version>1.8</compiler.source.version>
     </properties>

@@ -10,11 +10,11 @@ public class GitHubRepositoryChooserTest
   @Test
   public void testListRepositories() throws Exception
   {
-    GitHubRepositoryChooser repositoryChooser = new GitHubRepositoryChooser();
+    GitHubRepositoryPicker repositoryPicker = new GitHubRepositoryPicker();
     List<Repository> repositories = new ArrayList<>();
     repositories.add(new GitHubRepository("name1", "homepage1"));
     repositories.add(new GitHubRepository("name2", "homepage2"));
     repositories.add(new GitHubRepository("name3", "homepage3"));
-    repositoryChooser.listRepositories(repositories);
+    repositoryPicker.listRepositories(repositories);
   }
 }
