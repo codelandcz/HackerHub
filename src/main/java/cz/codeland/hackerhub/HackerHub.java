@@ -16,31 +16,6 @@ public class HackerHub
   {
   }
 
-  public Problem defineProblem()
-  {
-    ProblemReader reader = new ProblemReader();
-    problem = reader.loadProblem();
-
-    return problem;
-  }
-
-  public Client getClient()
-  {
-    return client;
-  }
-
-  public Problem getProblem()
-  {
-    return problem;
-  }
-
-  public Client setCredentials(ClientType clientType)
-  {
-    this.clientType = clientType;
-    client = ClientFactory.createClient(clientType).setCredentials();
-    return client;
-  }
-
   public static void main(String[] args) throws IOException
   {
     HackerHub hackerHub = new HackerHub();
@@ -66,6 +41,31 @@ public class HackerHub
     selectedRepository.createContent(hackerHub.getClient(), content, commitMessage, path);
 
     System.out.println("Done. Bye.");
+  }
+
+  public Problem defineProblem()
+  {
+    ProblemReader reader = new ProblemReader();
+    problem = reader.loadProblem();
+
+    return problem;
+  }
+
+  public Client getClient()
+  {
+    return client;
+  }
+
+  public Problem getProblem()
+  {
+    return problem;
+  }
+
+  public Client setCredentials(ClientType clientType)
+  {
+    this.clientType = clientType;
+    client = ClientFactory.createClient(clientType).setCredentials();
+    return client;
   }
 
   public Repository selectRepository()
