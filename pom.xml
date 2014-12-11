@@ -10,16 +10,19 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <mainClass>cz.codeland.hackerhub.Main</mainClass>
+        <jar.final.name>HackerHub</jar.final.name>
+        <compiler.source.version>1.8</compiler.source.version>
     </properties>
     <build>
+        <finalName>${jar.final.name}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${compiler.source.version}</source>
+                    <target>${compiler.source.version}</target>
                 </configuration>
             </plugin>
             <plugin>

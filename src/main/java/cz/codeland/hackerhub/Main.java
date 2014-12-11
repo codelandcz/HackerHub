@@ -44,6 +44,6 @@ public class Main
     String path = problem.shortName + "/src/Main.java";
     selectedRepository.createContent(client, content, commitMessage, path);
 
-    System.out.println("Done.Bye.");
+    System.out.println("Done. Bye.");
   }
 }
