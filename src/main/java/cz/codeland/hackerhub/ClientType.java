@@ -2,5 +2,19 @@ package cz.codeland.hackerhub;
 
 public enum ClientType
 {
-  GITHUB
+  GITHUB("GitHub"), BITBUCKET("Bitbucket");
+
+  private String name;
+
+  ClientType(String name)
+  {
+
+    this.name = name;
+  }
+
+  @Override
+  public String toString()
+  {
+    return name;
+  }
 }

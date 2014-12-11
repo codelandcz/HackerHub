@@ -11,6 +11,10 @@ public class HackerHub
   private ClientType       clientType;
   private RepositoryPicker repositoryPicker;
   private List<Repository> repositories;
+  private ClientType[]     clientTypes;
+  private IssueManager     issueManager;
+  private Repository       selectedRepository;
+  private Issue            createdIssue;
 
   public HackerHub()
   {
@@ -20,27 +24,67 @@ public class HackerHub
   {
     HackerHub hackerHub = new HackerHub();
     hackerHub.defineProblem();
-    ClientType clientType = ClientType.GITHUB;
-    hackerHub.setCredentials(clientType);
+    hackerHub.listClients();
+    hackerHub.selectClient();
+    hackerHub.setCredentials();
 
     System.out.println("Reading repositories...");
     hackerHub.readRepositories();
     hackerHub.listRepositories();
-    Repository selectedRepository = hackerHub.selectRepository();
+    hackerHub.selectRepository();
 
     System.out.println("Creating issue...");
-    IssueManager manager = new GitHubIssueManager();
-    Issue createdIssue = manager.createIssue(hackerHub.getClient(), selectedRepository, hackerHub.getProblem());
-    System.out.println("Issue created:");
-    System.out.printf(" Title: %s%n", createdIssue.getTitle());
+    hackerHub.createIssueManager();
+    Issue createdIssue = hackerHub.createIssue();
+    System.out.printf("Issue created:%n Title: %s%n", createdIssue.getTitle());
 
     System.out.println("Creating file...");
-    String content = Helper.readFile("src/main/resources/MainTemplate.txt", Charset.defaultCharset());
-    String commitMessage = "init #" + createdIssue.getNumber() + " " + createdIssue.getTitle();
-    String path = hackerHub.getProblem().shortName + "/src/Main.java";
-    selectedRepository.createContent(hackerHub.getClient(), content, commitMessage, path);
+    String path = hackerHub.createFile();
+    System.out.printf("File created:%n Path: %s%n", path);
 
     System.out.println("Done. Bye.");
+  }
+
+  public String createFile() throws IOException
+  {
+    String content = Helper.readFile("src/main/resources/MainTemplate.txt", Charset.defaultCharset());
+    String commitMessage = "init #" + createdIssue.getNumber() + " " + createdIssue.getTitle();
+    String path = problem.shortName + "/src/Main.java";
+    selectedRepository.createContent(client, content, commitMessage, path);
+    return path;
+  }
+
+  public Issue createIssue() throws IOException
+  {
+    createdIssue = issueManager.createIssue(client, selectedRepository, problem);
+    return createdIssue;
+  }
+
+  public IssueManager createIssueManager()
+  {
+    issueManager = IssueManagerFactory.createIssueManager(clientType);
+    return issueManager;
+  }
+
+  public void listClients()
+  {
+    clientTypes = ClientType.values();
+    for (int i = 0; i < clientTypes.length; i++) {
+      System.out.printf("%3d) %s%n", i, clientTypes[i]);
+    }
+  }
+
+  public void selectClient()
+  {
+    do {
+      try {
+        int index = Helper.readInteger("Choose the client by the index.");
+        clientType = clientTypes[index];
+        break;
+      } catch (IndexOutOfBoundsException ignored) {
+        System.out.println("Please insert correct index.");
+      }
+    } while (true);
   }
 
   public Problem defineProblem()
@@ -61,17 +105,14 @@ public class HackerHub
     return problem;
   }
 
-  public Client setCredentials(ClientType clientType)
+  public Client setCredentials()
   {
-    this.clientType = clientType;
     client = ClientFactory.createClient(clientType).setCredentials();
     return client;
   }
 
   public Repository selectRepository()
   {
-    Repository selectedRepository;
-
     int index;
     do {
       try {

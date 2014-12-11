@@ -39,8 +39,7 @@ public class Helper
         input = scanner.nextInt();
         break;
       } catch (InputMismatchException e) {
-        System.out.println("Please insert correct index.");
-        scanner.next();
+        System.out.println("Please insert correct number.");
       }
     } while (true);
 
