@@ -147,7 +147,7 @@ public class HackerHub
     repositoryPicker.listRepositories(repositories);
   }
 
-  public List<Repository> readRepositories() throws IOException
+  public List<Repository> readRepositories()
   {
     repositoryPicker = RepositoryPickerFactory.createRepositoryPicker(clientType);
     repositories = repositoryPicker.getRepositories(client);

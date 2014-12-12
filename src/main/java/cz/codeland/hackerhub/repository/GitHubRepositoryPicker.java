@@ -10,12 +10,19 @@ import java.util.List;
 public class GitHubRepositoryPicker implements RepositoryPicker
 {
   @Override
-  public List<Repository> getRepositories(Client client) throws IOException
+  public List<Repository> getRepositories(Client client)
   {
     List<Repository> repositories = new ArrayList<>();
     RepositoryService service = new RepositoryService();
-    //TODO Auth
-    for (org.eclipse.egit.github.core.Repository repository : service.getRepositories(client.getUsername())) {
+
+    List<org.eclipse.egit.github.core.Repository> remoteRepositories = new ArrayList<>();
+    try {
+      remoteRepositories = service.getRepositories(client.getUsername());
+    } catch (IOException e) {
+      System.out.println("An error during reading the repositories.");
+    }
+
+    for (org.eclipse.egit.github.core.Repository repository : remoteRepositories) {
       repositories.add(new GitHubRepository(repository));
     }
 
