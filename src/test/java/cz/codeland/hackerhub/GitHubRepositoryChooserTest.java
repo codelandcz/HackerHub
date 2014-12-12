@@ -1,5 +1,8 @@
 package cz.codeland.hackerhub;
 
+import cz.codeland.hackerhub.repository.GitHubRepository;
+import cz.codeland.hackerhub.repository.GitHubRepositoryPicker;
+import cz.codeland.hackerhub.repository.Repository;
 import org.junit.Test;
 
 import java.util.ArrayList;

@@ -1,4 +1,6 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.repository;
+
+import cz.codeland.hackerhub.client.Client;
 
 import java.io.IOException;
 

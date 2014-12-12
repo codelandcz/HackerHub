@@ -1,5 +1,6 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.repository;
 
+import cz.codeland.hackerhub.client.Client;
 import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 

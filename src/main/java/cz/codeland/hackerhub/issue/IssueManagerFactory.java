@@ -1,4 +1,6 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.issue;
+
+import cz.codeland.hackerhub.client.ClientType;
 
 public class IssueManagerFactory
 {

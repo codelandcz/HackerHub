@@ -1,4 +1,8 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.issue;
+
+import cz.codeland.hackerhub.problem.Problem;
+import cz.codeland.hackerhub.repository.Repository;
+import cz.codeland.hackerhub.client.GitHubClient;
 
 import java.io.IOException;
 
@@ -12,8 +16,8 @@ public class GitHubIssueService implements IssueService
 
     issueService = new org.eclipse.egit.github.core.service.IssueService(client.getClient());
     org.eclipse.egit.github.core.Issue serviceIssue = new org.eclipse.egit.github.core.Issue();
-    serviceIssue.setTitle("Solve \"" + problem.name + "\" problem");
-    serviceIssue.setBody(problem.link);
+    serviceIssue.setTitle("Solve \"" + problem.getName() + "\" problem");
+    serviceIssue.setBody(problem.getLink());
     createdIssue = issueService.createIssue(client.getUsername(), repository.getName(), serviceIssue);
 
     GitHubIssue issue = new GitHubIssue();

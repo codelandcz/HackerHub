@@ -1,4 +1,6 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.problem;
+
+import cz.codeland.hackerhub.Helper;
 
 import java.net.MalformedURLException;
 
@@ -18,5 +20,20 @@ public class Problem
   public String toString()
   {
     return "{ " + this.name + "(" + this.shortName + "), " + this.link + " }";
+  }
+
+  public String getShortName()
+  {
+    return shortName;
+  }
+
+  public String getLink()
+  {
+    return link;
+  }
+
+  public String getName()
+  {
+    return name;
   }
 }

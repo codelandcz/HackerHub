@@ -1,10 +1,12 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.problem;
+
+import cz.codeland.hackerhub.Helper;
 
 import java.net.MalformedURLException;
 
 public class ProblemReader
 {
-  Problem loadProblem()
+  public Problem loadProblem()
   {
     Problem problem = new Problem();
     problem.name = Helper.readString("Name of the problem.");

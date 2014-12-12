@@ -1,4 +1,4 @@
-package cz.codeland.hackerhub;
+package cz.codeland.hackerhub.client;
 
 public enum ClientType
 {

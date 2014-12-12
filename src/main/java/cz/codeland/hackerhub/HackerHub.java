@@ -1,5 +1,17 @@
 package cz.codeland.hackerhub;
 
+import cz.codeland.hackerhub.client.Client;
+import cz.codeland.hackerhub.client.ClientFactory;
+import cz.codeland.hackerhub.client.ClientType;
+import cz.codeland.hackerhub.issue.Issue;
+import cz.codeland.hackerhub.issue.IssueManager;
+import cz.codeland.hackerhub.issue.IssueManagerFactory;
+import cz.codeland.hackerhub.problem.Problem;
+import cz.codeland.hackerhub.problem.ProblemReader;
+import cz.codeland.hackerhub.repository.Repository;
+import cz.codeland.hackerhub.repository.RepositoryPicker;
+import cz.codeland.hackerhub.repository.RepositoryPickerFactory;
+
 import java.io.IOException;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -49,7 +61,7 @@ public class HackerHub
   {
     String content = Helper.readFile("src/main/resources/MainTemplate.txt", Charset.defaultCharset());
     String commitMessage = "init #" + createdIssue.getNumber() + " " + createdIssue.getTitle();
-    String path = problem.shortName + "/src/Main.java";
+    String path = problem.getShortName() + "/src/Main.java";
     selectedRepository.createContent(client, content, commitMessage, path);
     return path;
   }
