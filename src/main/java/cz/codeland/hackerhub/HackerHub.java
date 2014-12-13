@@ -3,6 +3,8 @@ package cz.codeland.hackerhub;
 import cz.codeland.hackerhub.client.Client;
 import cz.codeland.hackerhub.client.ClientFactory;
 import cz.codeland.hackerhub.client.ClientType;
+import cz.codeland.hackerhub.configuration.Configuration;
+import cz.codeland.hackerhub.helper.Helper;
 import cz.codeland.hackerhub.issue.Issue;
 import cz.codeland.hackerhub.issue.IssueManager;
 import cz.codeland.hackerhub.issue.IssueManagerFactory;
@@ -32,7 +34,7 @@ public class HackerHub
   {
   }
 
-  public static void main(String[] args) throws IOException
+  public static void main(String[] args)
   {
     HackerHub hackerHub = new HackerHub();
     hackerHub.defineProblem();
@@ -57,18 +59,29 @@ public class HackerHub
     System.out.println("Done. Bye.");
   }
 
-  public String createFile() throws IOException
+  public String createFile()
   {
-    String content = Helper.readFile("src/main/resources/MainTemplate.txt", Charset.defaultCharset());
-    String commitMessage = "init #" + createdIssue.getNumber() + " " + createdIssue.getTitle();
-    String path = problem.getShortName() + "/src/Main.java";
-    selectedRepository.createContent(client, content, commitMessage, path);
+    String path = null;
+    try {
+      String content = Helper.readFile(Configuration.getInstance().getTemplatePath(), Charset.defaultCharset());
+      String commitMessage = "init #" + createdIssue.getNumber() + " " + createdIssue.getTitle();
+      path = problem.getShortName() + Configuration.getInstance().getRemotePath();
+      selectedRepository.createContent(client, content, commitMessage, path);
+    } catch (IOException e) {
+      System.out.println("An error during creating the File.");
+      e.printStackTrace();
+    }
     return path;
   }
 
-  public Issue createIssue() throws IOException
+  public Issue createIssue()
   {
-    createdIssue = issueManager.createIssue(client, selectedRepository, problem);
+    try {
+      createdIssue = issueManager.createIssue(client, selectedRepository, problem);
+    } catch (IOException e) {
+      System.out.println("An error during creating the Issue.");
+      e.printStackTrace();
+    }
     return createdIssue;
   }
 

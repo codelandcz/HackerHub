@@ -1,6 +1,6 @@
 package cz.codeland.hackerhub.problem;
 
-import cz.codeland.hackerhub.Helper;
+import cz.codeland.hackerhub.helper.Helper;
 
 import java.net.MalformedURLException;
 

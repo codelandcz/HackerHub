@@ -1,5 +1,6 @@
 package cz.codeland.hackerhub;
 
+import cz.codeland.hackerhub.helper.Helper;
 import junit.framework.Assert;
 import org.junit.Test;
 

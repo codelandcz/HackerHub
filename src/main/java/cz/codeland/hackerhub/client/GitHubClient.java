@@ -1,6 +1,6 @@
 package cz.codeland.hackerhub.client;
 
-import cz.codeland.hackerhub.Helper;
+import cz.codeland.hackerhub.helper.Helper;
 
 public class GitHubClient implements Client
 {
