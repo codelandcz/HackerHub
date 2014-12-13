@@ -2,7 +2,7 @@ package cz.codeland.hackerhub.client;
 
 public enum ClientType
 {
-  GITHUB("GitHub"), BITBUCKET("Bitbucket");
+  GITHUB("GitHub");
 
   private String name;
 

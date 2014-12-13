@@ -20,7 +20,7 @@ public class Helper
   public static String readString(String question)
   {
     System.out.println(question);
-    return scanner.nextLine().trim();
+    return scanner.nextLine();
   }
 
   public static String parseLink(String link) throws MalformedURLException
@@ -36,7 +36,7 @@ public class Helper
     int input;
     do {
       try {
-        input = scanner.nextInt();
+        input = Integer.parseInt(scanner.nextLine());
         break;
       } catch (InputMismatchException e) {
         System.out.println("Please insert correct number.");

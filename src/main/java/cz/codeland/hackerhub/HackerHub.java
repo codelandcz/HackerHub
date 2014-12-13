@@ -25,7 +25,6 @@ public class HackerHub
   private ClientType       clientType;
   private RepositoryPicker repositoryPicker;
   private List<Repository> repositories;
-  private ClientType[]     clientTypes;
   private IssueManager     issueManager;
   private Repository       selectedRepository;
   private Issue            createdIssue;
@@ -38,8 +37,9 @@ public class HackerHub
   {
     HackerHub hackerHub = new HackerHub();
     hackerHub.defineProblem();
+    System.out.println("Available clients:");
     hackerHub.listClients();
-    hackerHub.selectClient();
+    hackerHub.selectClientType();
     hackerHub.setCredentials();
 
     System.out.println("Reading repositories...");
@@ -69,7 +69,6 @@ public class HackerHub
       selectedRepository.createContent(client, content, commitMessage, path);
     } catch (IOException e) {
       System.out.println("An error during creating the File.");
-      e.printStackTrace();
     }
     return path;
   }
@@ -80,7 +79,6 @@ public class HackerHub
       createdIssue = issueManager.createIssue(client, selectedRepository, problem);
     } catch (IOException e) {
       System.out.println("An error during creating the Issue.");
-      e.printStackTrace();
     }
     return createdIssue;
   }
@@ -93,17 +91,18 @@ public class HackerHub
 
   public void listClients()
   {
-    clientTypes = ClientType.values();
+    ClientType[] clientTypes = ClientType.values();
     for (int i = 0; i < clientTypes.length; i++) {
       System.out.printf("%3d) %s%n", i, clientTypes[i]);
     }
   }
 
-  public void selectClient()
+  public void selectClientType()
   {
+    ClientType[] clientTypes = ClientType.values();
     do {
       try {
-        int index = Helper.readInteger("Choose the client by the index.");
+        int index = Helper.readInteger("Choose the client type by the index.");
         clientType = clientTypes[index];
         break;
       } catch (IndexOutOfBoundsException ignored) {
@@ -132,7 +131,8 @@ public class HackerHub
 
   public Client setCredentials()
   {
-    client = ClientFactory.createClient(clientType).setCredentials();
+    client = ClientFactory.createClient(clientType);
+    client.setCredentials();
     return client;
   }
 
